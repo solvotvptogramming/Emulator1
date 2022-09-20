@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -34,19 +35,18 @@ namespace Emulator
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            
-            this.Cursor = Cursors.Wait;
-            string Event = "32";
-            // p.logdata
-            Events codeStruct = new Events();
-            {
-               Events codeStruct2 = new Events();
-                codeStruct2 = new Events();
-               
+         
+            var DT = DateTime.Now;
+            var Gui = System.Guid.NewGuid();
+            db = new Gimnazia1Entities();
+            var customers = db.Set<pLogData>();
+            db.pLogData.Add(new pLogData {TimeVal = DT, NumCom = 376, IDComp = 1, Par1 = 3, Par2 = 0, Par3 = 125, Par4 = 1, Event = 32,
+            IndexKey = 50363649,RazdIndex = 1, HozOrgan = 4, HozGuest = 1, Remark = "1: Вход   Турникет 1,   Считыватель 1, Прибор 125", DoorIndex = 1, Mode = 1, DeviceTime = DT,
+            VEvent = 0, ZReserv = 33, ZoneIndex = 1, ReaderIndex = 1, Sign = 0, tpRzdIndex = 1, tpPar4 = null, IndexZone = 1, tpIndex = 8, GUID = Gui , IdComment = null
 
-
-            }
-            
+            });
+            db.SaveChanges();
+            MessageBox.Show("Готово");
         }   
     }
 }
